@@ -1,0 +1,28 @@
+#app{
+    font: 14px, Helvetica, Arial, sans-serif;
+    color: #4d4d4d;
+    min-width: 550px;
+    max-width: 850pc;
+}
+
+a.active{
+    color: orange;
+}
+
+nav{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.jumbotron{
+    text-align: center;
+}
+
+.title{
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+}
+
