@@ -1,4 +1,6 @@
 import React from 'react';
+import Title from '../common/Title';
+import CourseList from './CourseList';
 
 
 
@@ -9,7 +11,8 @@ class CoursePage extends React.Component{
         this.state = {
             course: {
                 id: 0,
-                title: ''
+                title: '',
+                author: ''
             },
             courses: [],
             
@@ -20,11 +23,9 @@ class CoursePage extends React.Component{
     }
     
     updateCourseState(event){
-       let courseName = event.target.value;
-       let course = {
-           id: this.state.course.id,
-           title: courseName
-       }
+       let fieldName = event.target.name;
+       let course = Object.assign({}, this.state.course);
+       course[fieldName] = event.target.value;
       this.setState({course});
     }
 
@@ -34,7 +35,8 @@ class CoursePage extends React.Component{
         this.setState({course})
     }
 
-    saveCourse(){
+    saveCourse(event){
+        event.preventDefault();
         let newcourses = this.state.courses;
         this.iterateId();
         newcourses.push(this.state.course);
@@ -42,16 +44,39 @@ class CoursePage extends React.Component{
     }
 
     render(){
+        const title="Create Course";
+        const buttonStyle = {
+            float: 'right'
+        }
         return(
             <div>
-                 <h1>Create Course</h1>
-                 {this.state.courses.map(course =>{
-                     return <ol key={course.id}>{course.id} | {course.title}</ol>
-                 })}
-                <input className="form-control" name="title" onChange={this.updateCourseState}/>
+                 <Title title={title}></Title>
+                <div className="form-card">
+                    <form>
+
+                    <div class="form-gorup">
+                      <label class="control-label">Title</label>
+                      <div className="field">
+                        <input className="form-control" name="title" onChange={this.updateCourseState}/>
+                      </div> 
+                    </div>
+
+                    <div class="form-gorup">
+                      <label class="control-label">Author</label>
+                      <div className="field">
+                        <input className="form-control" name="author" onChange={this.updateCourseState}/>
+                      </div>
+                    </div>
+                   
+                     <br></br>
+                        <input style={buttonStyle} type="submit" className="btn btn-primary" onClick={this.saveCourse}></input>
+                    </form>
+                 
+                </div>
                 <br></br>
-                <input type="submit" className="btn btn-primary" onClick={this.saveCourse}></input>
                 <br></br>
+                <CourseList courses={this.state.courses}></CourseList>
+           
             </div>
         )
     }

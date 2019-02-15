@@ -23,6 +23,14 @@ nav{
 }
 
 .container{
-    text-align: center;
+    /* text-align: center; */
 }
 
+.form-card{
+    margin: auto;
+    width: 400px;
+}
+
+.form-card > .btn{
+    text-align: right;
+}
